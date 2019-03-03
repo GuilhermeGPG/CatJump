@@ -13,19 +13,19 @@
 script = ExtResource( 1 )
 _sections_unfolded = [ "Pause" ]
 ground = ExtResource( 2 )
-ground_range_x = Vector2( 500, 800 )
-ground_y_position = 1000
+ground_range_x = Vector2( 700, 750 )
+ground_range_y = Vector2( 1300, 1100 )
 
 [node name="ground" parent="ground_group" index="0" instance=ExtResource( 2 )]
 
-position = Vector2( 310.823, 973.54 )
+position = Vector2( 75.7946, 969.839 )
 
 [node name="ground2" parent="ground_group" index="1" instance=ExtResource( 2 )]
 
-position = Vector2( 660.484, 971.286 )
+position = Vector2( 379.716, 1210.02 )
 
 [node name="cat" parent="." index="1" instance=ExtResource( 3 )]
 
-position = Vector2( 311.19, 563.24 )
+position = Vector2( 103.921, 494.768 )
 
 

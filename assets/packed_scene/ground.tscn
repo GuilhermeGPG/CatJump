@@ -6,14 +6,14 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 119.101, 602 )
+extents = Vector2( 122.024, 602 )
 
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 119.654, 10 )
+extents = Vector2( 127.699, 22.2927 )
 
-[node name="ground" type="StaticBody2D"]
+[node name="ground" type="StaticBody2D" index="0"]
 
 scale = Vector2( 0.5, 0.5 )
 input_pickable = false
@@ -28,7 +28,7 @@ _sections_unfolded = [ "Transform" ]
 __meta__ = {
 "_edit_group_": true
 }
-speed = 100
+speed_range = Vector2( 100, 350 )
 
 [node name="sprite" type="Sprite" parent="." index="0"]
 

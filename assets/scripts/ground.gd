@@ -1,16 +1,19 @@
 extends StaticBody2D
 
 var is_moving = false
-export (int) var speed = 100
+var speed = 100
+export (Vector2) var speed_range = Vector2(50, 250)
 
 func _ready():
-	pass
+	randomize()
+	speed = int(rand_range(speed_range.x, speed_range.y))
 	
 func _process(delta):
 	if is_moving:
 		position.y += speed * delta
 		
-		if position.y > get_viewport_rect().size.y + ($sprite.texture.get_height()/ 2):
+		if position.y > get_viewport_rect().size.y + ($sprite.texture.get_height() / 2) or \
+			position.x < 0 - ($sprite.texture.get_width() / 2):
 			queue_free()
 
 
