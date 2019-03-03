@@ -59,5 +59,5 @@ func player_death():
 	if is_alive:
 		if position.y > get_viewport_rect().size.y:
 			is_alive = false
-			linear_valocity = Vector2(0, JUMP_FORCE)
+			linear_valocity = Vector2(0, JUMP_FORCE - 500)
 			
