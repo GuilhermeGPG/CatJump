@@ -23,6 +23,9 @@ constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
 _sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="sprite" type="Sprite" parent="." index="0"]
 
