@@ -14,6 +14,10 @@ config/name="Cat"
 run/main_scene="res://assets/scene/main_menu.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+game_controller="*res://assets/scripts/game_controller.gd"
+
 [display]
 
 window/size/width=720

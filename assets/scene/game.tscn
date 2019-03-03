@@ -38,7 +38,7 @@ tracks/0/keys = {
 "values": [ Vector2( 360, -300 ), Vector2( 360, 600 ) ]
 }
 
-[node name="game" type="Node2D" index="0"]
+[node name="game" type="Node2D"]
 
 [node name="background" type="ParallaxBackground" parent="." index="0"]
 
