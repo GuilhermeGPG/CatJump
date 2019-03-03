@@ -21,3 +21,4 @@ func _on_area_body_entered(body):
 	if body.name == "cat" and not is_moving:
 		is_moving = true
 		get_tree().call_group("node_ground_group", "generate_ground", position.x)
+		get_tree().call_group("node_hud_group", "add_score")

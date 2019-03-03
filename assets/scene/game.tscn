@@ -1,15 +1,48 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/sprites/bg.png" type="Texture" id=1]
-[ext_resource path="res://assets/scripts/ground_group.gd" type="Script" id=2]
-[ext_resource path="res://assets/packed_scene/ground.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/packed_scene/cat.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/sprites/water.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/water.png" type="Texture" id=2]
+[ext_resource path="res://assets/scripts/hud.gd" type="Script" id=3]
+[ext_resource path="res://assets/font/Bubblegum.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://assets/sprites/game_over.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/menu_button.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/restart_button.png" type="Texture" id=7]
+[ext_resource path="res://assets/scripts/ground_group.gd" type="Script" id=8]
+[ext_resource path="res://assets/packed_scene/ground.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/packed_scene/cat.tscn" type="PackedScene" id=10]
 
-[node name="game" type="Node2D"]
+[sub_resource type="DynamicFont" id=1]
+
+size = 90
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 4 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="Animation" id=2]
+
+resource_name = "game_over"
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 360, -300 ), Vector2( 360, 600 ) ]
+}
+
+[node name="game" type="Node2D" index="0"]
 
 [node name="background" type="ParallaxBackground" parent="." index="0"]
 
+editor/display_folded = true
 layer = -1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -31,36 +64,14 @@ _sections_unfolded = [ "Motion" ]
 
 [node name="sprite_bg" type="Sprite" parent="background/paralax_bg" index="0"]
 
-position = Vector2( 332.162, 642.378 )
+position = Vector2( 334.68, 619.72 )
 scale = Vector2( 1.7, 1.7 )
 texture = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="ground_group" type="Node2D" parent="." index="1" groups=[
-"node_ground_group",
-]]
+[node name="foreground" type="ParallaxBackground" parent="." index="1"]
 
 editor/display_folded = true
-script = ExtResource( 2 )
-_sections_unfolded = [ "Pause" ]
-ground = ExtResource( 3 )
-ground_range_x = Vector2( 700, 750 )
-ground_range_y = Vector2( 1300, 1100 )
-
-[node name="ground" parent="ground_group" index="0" instance=ExtResource( 3 )]
-
-position = Vector2( 75.7946, 969.839 )
-
-[node name="ground2" parent="ground_group" index="1" instance=ExtResource( 3 )]
-
-position = Vector2( 379.716, 1210.02 )
-
-[node name="cat" parent="." index="2" instance=ExtResource( 4 )]
-
-position = Vector2( 103.921, 494.768 )
-
-[node name="foreground" type="ParallaxBackground" parent="." index="3"]
-
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -76,7 +87,7 @@ _sections_unfolded = [ "Scroll" ]
 
 [node name="paralax_fg" type="ParallaxLayer" parent="foreground" index="0"]
 
-motion_scale = Vector2( 1.5, 1 )
+motion_scale = Vector2( 1.2, 1 )
 motion_offset = Vector2( 0, 0 )
 motion_mirroring = Vector2( 1024, 0 )
 _sections_unfolded = [ "Motion" ]
@@ -84,6 +95,170 @@ _sections_unfolded = [ "Motion" ]
 [node name="sprite_fg" type="Sprite" parent="foreground/paralax_fg" index="0"]
 
 position = Vector2( 231.322, 1269.26 )
+texture = ExtResource( 2 )
+
+[node name="hud" type="CanvasLayer" parent="." index="2" groups=[
+"node_hud_group",
+]]
+
+layer = 2
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+script = ExtResource( 3 )
+
+[node name="score" type="Label" parent="hud" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -2.0
+margin_top = 64.0
+margin_right = 716.0
+margin_bottom = 194.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0.151031, 0.789063, 0.250724, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 1
+custom_constants/shadow_as_outline = 1
+text = "0"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors", "custom_constants", "custom_fonts" ]
+
+[node name="game_over" type="Sprite" parent="hud" index="1"]
+
+position = Vector2( 360, -360 )
 texture = ExtResource( 5 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="best_score" type="Label" parent="hud/game_over" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -362.0
+margin_top = 45.0
+margin_right = 356.0
+margin_bottom = 175.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0.816406, 0.789, 0.114807, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 1
+custom_constants/shadow_as_outline = 1
+text = "0"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors", "custom_constants", "custom_fonts" ]
+
+[node name="last_score" type="Label" parent="hud/game_over" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -362.0
+margin_top = -107.0
+margin_right = 356.0
+margin_bottom = 23.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0.816406, 0.789, 0.114807, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 1
+custom_constants/shadow_as_outline = 1
+text = "0"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors", "custom_constants", "custom_fonts" ]
+
+[node name="animation" type="AnimationPlayer" parent="hud/game_over" index="2"]
+
+root_node = NodePath("..")
+autoplay = ""
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/game_over = SubResource( 2 )
+blend_times = [  ]
+
+[node name="menu" type="TouchScreenButton" parent="hud/game_over" index="3"]
+
+position = Vector2( -156.385, 126.249 )
+normal = ExtResource( 6 )
+pressed = ExtResource( 6 )
+bitmask = null
+shape = null
+shape_centered = true
+shape_visible = true
+passby_press = false
+action = ""
+visibility_mode = 0
+
+[node name="restart" type="TouchScreenButton" parent="hud/game_over" index="4"]
+
+position = Vector2( 65.9751, 126.249 )
+normal = ExtResource( 7 )
+pressed = ExtResource( 7 )
+bitmask = null
+shape = null
+shape_centered = true
+shape_visible = true
+passby_press = false
+action = ""
+visibility_mode = 0
+
+[node name="ground_group" type="Node2D" parent="." index="3" groups=[
+"node_ground_group",
+]]
+
+editor/display_folded = true
+script = ExtResource( 8 )
+_sections_unfolded = [ "Pause" ]
+ground = ExtResource( 9 )
+ground_range_x = Vector2( 700, 750 )
+ground_range_y = Vector2( 1300, 1100 )
+
+[node name="ground" parent="ground_group" index="0" instance=ExtResource( 9 )]
+
+position = Vector2( 75.7946, 969.839 )
+
+[node name="ground2" parent="ground_group" index="1" instance=ExtResource( 9 )]
+
+position = Vector2( 379.716, 1210.02 )
+
+[node name="cat" parent="." index="4" instance=ExtResource( 10 )]
+
+position = Vector2( 103.921, 494.768 )
+
+[connection signal="pressed" from="hud/game_over/menu" to="hud" method="_on_menu_pressed"]
+
+[connection signal="pressed" from="hud/game_over/restart" to="hud" method="_on_restart_pressed"]
 
 

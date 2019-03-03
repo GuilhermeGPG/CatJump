@@ -60,4 +60,5 @@ func player_death():
 		if position.y > get_viewport_rect().size.y:
 			is_alive = false
 			linear_valocity = Vector2(0, JUMP_FORCE - 500)
+			get_tree().call_group("node_hud_group", "game_over")
 			
