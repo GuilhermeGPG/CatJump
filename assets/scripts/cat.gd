@@ -13,15 +13,34 @@ func _ready():
 	set_process_input(true)
 
 func _physics_process(delta):
-	_set_gravity(delta)
-	_jump_controller(delta)
-	_check_death()
-	
+	set_gravity(delta)
+	jump_controller()
+	player_death()
+	play_animations()
 
-func _set_gravity(delta):
+func _input(event):
+	if event is InputEventScreenTouch:
+		if event.pressed:
+			is_moving = true and is_on_floor()
+			is_jumping = true
+		else:
+			is_moving = false
+
+func play_animations():
+	if is_alive:
+		if is_on_floor():
+			$animation.play("idle")
+		elif linear_valocity.y > 0:
+			$animation.play("fall")
+		elif linear_valocity.y < 0:
+			$animation.play("jump")
+	else:
+		$animation.play("dead")
+
+func set_gravity(delta):
 	linear_valocity.y += GRAVITY * delta
 
-func _jump_controller(delta):
+func jump_controller():
 	if is_alive:
 		if is_on_floor():
 			linear_valocity.x = 0
@@ -36,8 +55,9 @@ func _jump_controller(delta):
 		
 	linear_valocity = move_and_slide(linear_valocity, Vector2(0, -1))
 
-func _check_death():
+func player_death():
 	if is_alive:
 		if position.y > get_viewport_rect().size.y:
 			is_alive = false
+			linear_valocity = Vector2(0, JUMP_FORCE)
 			
