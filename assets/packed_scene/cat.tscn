@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://assets/scripts/cat.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/cat/Idle (1).png" type="Texture" id=2]
@@ -37,6 +37,8 @@
 [ext_resource path="res://assets/sprites/cat/Jump (6).png" type="Texture" id=35]
 [ext_resource path="res://assets/sprites/cat/Jump (7).png" type="Texture" id=36]
 [ext_resource path="res://assets/sprites/cat/Jump (8).png" type="Texture" id=37]
+[ext_resource path="res://assets/audio/jump.wav" type="AudioStream" id=38]
+[ext_resource path="res://assets/audio/death.wav" type="AudioStream" id=39]
 
 [sub_resource type="SpriteFrames" id=1]
 
@@ -69,7 +71,7 @@ custom_solver_bias = 0.0
 radius = 82.8344
 height = 120.614
 
-[node name="cat" type="KinematicBody2D" index="0"]
+[node name="cat" type="KinematicBody2D"]
 
 scale = Vector2( 0.5, 0.5 )
 input_pickable = false
@@ -125,5 +127,23 @@ editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
 _sections_unfolded = [ "Limit", "Transform" ]
+
+[node name="jump_fx" type="AudioStreamPlayer" parent="." index="3"]
+
+stream = ExtResource( 38 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[node name="dead_fx" type="AudioStreamPlayer" parent="." index="4"]
+
+stream = ExtResource( 39 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = "Master"
 
 

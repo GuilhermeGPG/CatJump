@@ -46,6 +46,7 @@ func jump_controller():
 			linear_valocity.x = 0
 			if is_jumping:
 				linear_valocity.y = JUMP_FORCE
+				$jump_fx.play()
 		elif is_moving:
 			linear_valocity.x = SPEED
 		else:
@@ -60,5 +61,6 @@ func player_death():
 		if position.y > get_viewport_rect().size.y:
 			is_alive = false
 			linear_valocity = Vector2(0, JUMP_FORCE - 500)
+			$dead_fx.play()
 			get_tree().call_group("node_hud_group", "game_over")
 			

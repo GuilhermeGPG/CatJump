@@ -1,22 +1,23 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/sprites/bg.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/water.png" type="Texture" id=2]
 [ext_resource path="res://assets/scripts/hud.gd" type="Script" id=3]
-[ext_resource path="res://assets/font/Bubblegum.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://assets/sprites/game_over.png" type="Texture" id=5]
-[ext_resource path="res://assets/sprites/menu_button.png" type="Texture" id=6]
-[ext_resource path="res://assets/sprites/restart_button.png" type="Texture" id=7]
-[ext_resource path="res://assets/scripts/ground_group.gd" type="Script" id=8]
-[ext_resource path="res://assets/packed_scene/ground.tscn" type="PackedScene" id=9]
-[ext_resource path="res://assets/packed_scene/cat.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/audio/song.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/font/Bubblegum.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://assets/sprites/game_over.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/menu_button.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/restart_button.png" type="Texture" id=8]
+[ext_resource path="res://assets/scripts/ground_group.gd" type="Script" id=9]
+[ext_resource path="res://assets/packed_scene/ground.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/packed_scene/cat.tscn" type="PackedScene" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 
 size = 90
 use_mipmaps = true
 use_filter = true
-font_data = ExtResource( 4 )
+font_data = ExtResource( 5 )
 _sections_unfolded = [ "Font", "Settings" ]
 
 [sub_resource type="Animation" id=2]
@@ -38,7 +39,7 @@ tracks/0/keys = {
 "values": [ Vector2( 360, -300 ), Vector2( 360, 600 ) ]
 }
 
-[node name="game" type="Node2D"]
+[node name="game" type="Node2D" index="0"]
 
 [node name="background" type="ParallaxBackground" parent="." index="0"]
 
@@ -108,7 +109,16 @@ scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 script = ExtResource( 3 )
 
-[node name="score" type="Label" parent="hud" index="0"]
+[node name="music" type="AudioStreamPlayer" parent="hud" index="0"]
+
+stream = ExtResource( 4 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[node name="score" type="Label" parent="hud" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -136,10 +146,11 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_colors", "custom_constants", "custom_fonts" ]
 
-[node name="game_over" type="Sprite" parent="hud" index="1"]
+[node name="game_over" type="Sprite" parent="hud" index="2"]
 
+editor/display_folded = true
 position = Vector2( 360, -360 )
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="best_score" type="Label" parent="hud/game_over" index="0"]
@@ -211,8 +222,8 @@ blend_times = [  ]
 [node name="menu" type="TouchScreenButton" parent="hud/game_over" index="3"]
 
 position = Vector2( -156.385, 126.249 )
-normal = ExtResource( 6 )
-pressed = ExtResource( 6 )
+normal = ExtResource( 7 )
+pressed = ExtResource( 7 )
 bitmask = null
 shape = null
 shape_centered = true
@@ -224,8 +235,8 @@ visibility_mode = 0
 [node name="restart" type="TouchScreenButton" parent="hud/game_over" index="4"]
 
 position = Vector2( 65.9751, 126.249 )
-normal = ExtResource( 7 )
-pressed = ExtResource( 7 )
+normal = ExtResource( 8 )
+pressed = ExtResource( 8 )
 bitmask = null
 shape = null
 shape_centered = true
@@ -239,21 +250,21 @@ visibility_mode = 0
 ]]
 
 editor/display_folded = true
-script = ExtResource( 8 )
+script = ExtResource( 9 )
 _sections_unfolded = [ "Pause" ]
-ground = ExtResource( 9 )
+ground = ExtResource( 10 )
 ground_range_x = Vector2( 700, 750 )
 ground_range_y = Vector2( 1300, 1100 )
 
-[node name="ground" parent="ground_group" index="0" instance=ExtResource( 9 )]
+[node name="ground" parent="ground_group" index="0" instance=ExtResource( 10 )]
 
 position = Vector2( 75.7946, 969.839 )
 
-[node name="ground2" parent="ground_group" index="1" instance=ExtResource( 9 )]
+[node name="ground2" parent="ground_group" index="1" instance=ExtResource( 10 )]
 
 position = Vector2( 379.716, 1210.02 )
 
-[node name="cat" parent="." index="4" instance=ExtResource( 10 )]
+[node name="cat" parent="." index="4" instance=ExtResource( 11 )]
 
 position = Vector2( 103.921, 494.768 )
 

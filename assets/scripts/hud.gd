@@ -2,11 +2,15 @@ extends CanvasLayer
 
 var score = 0
 
+func _ready():
+	$music.play()
+
 func add_score():
 	score += 1
 	$score.text = str(score)
 
 func game_over():
+	$music.stop()
 	$score.hide()
 	$game_over/animation.play("game_over")
 	$game_over/last_score.text = str(score)
