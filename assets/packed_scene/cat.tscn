@@ -69,7 +69,7 @@ custom_solver_bias = 0.0
 radius = 82.8344
 height = 120.614
 
-[node name="cat" type="KinematicBody2D"]
+[node name="cat" type="KinematicBody2D" index="0"]
 
 scale = Vector2( 0.5, 0.5 )
 input_pickable = false
@@ -81,11 +81,14 @@ _sections_unfolded = [ "Transform" ]
 __meta__ = {
 "_edit_group_": true
 }
+GRAVITY = 2000
+SPEED = 500
+JUMP_FORCE = -900
 
 [node name="animation" type="AnimatedSprite" parent="." index="0"]
 
 frames = SubResource( 1 )
-animation = "jump"
+animation = "fall"
 frame = 7
 playing = true
 

@@ -1,8 +1,8 @@
 extends KinematicBody2D
 
-const GRAVITY = 2000
-const SPEED = 500
-const JUMP_FORCE = -900
+export (int) var GRAVITY = 2000
+export (int) var SPEED = 500
+export (int) var JUMP_FORCE = -900
 
 var linear_valocity = Vector2(0, 0) 
 var is_jumping = false
@@ -53,7 +53,7 @@ func jump_controller():
 		
 		is_jumping = false
 		
-	linear_valocity = move_and_slide(linear_valocity, Vector2(0, -1))
+	move_and_slide(linear_valocity, Vector2(0, -1))
 
 func player_death():
 	if is_alive:

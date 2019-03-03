@@ -1,24 +1,31 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/packed_scene/ground.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/packed_scene/cat.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/scripts/ground_group.gd" type="Script" id=1]
+[ext_resource path="res://assets/packed_scene/ground.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/packed_scene/cat.tscn" type="PackedScene" id=3]
 
-[node name="game" type="Node2D" index="0"]
+[node name="game" type="Node2D"]
 
-[node name="grounds" type="Node2D" parent="." index="0"]
+[node name="ground_group" type="Node2D" parent="." index="0" groups=[
+"node_ground_group",
+]]
 
-editor/display_folded = true
+script = ExtResource( 1 )
+_sections_unfolded = [ "Pause" ]
+ground = ExtResource( 2 )
+ground_range_x = Vector2( 500, 800 )
+ground_y_position = 1000
 
-[node name="ground" parent="grounds" index="0" instance=ExtResource( 1 )]
+[node name="ground" parent="ground_group" index="0" instance=ExtResource( 2 )]
 
-position = Vector2( 66.6223, 1091.86 )
+position = Vector2( 310.823, 973.54 )
 
-[node name="ground2" parent="grounds" index="1" instance=ExtResource( 1 )]
+[node name="ground2" parent="ground_group" index="1" instance=ExtResource( 2 )]
 
-position = Vector2( 255.385, 1152.93 )
+position = Vector2( 660.484, 971.286 )
 
-[node name="cat" parent="." index="1" instance=ExtResource( 2 )]
+[node name="cat" parent="." index="1" instance=ExtResource( 3 )]
 
-position = Vector2( 79.5766, 344.215 )
+position = Vector2( 311.19, 563.24 )
 
 
