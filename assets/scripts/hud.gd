@@ -13,7 +13,7 @@ func game_over():
 	$game_over/best_score.text = str(score)
 
 func _on_menu_pressed():
-	get_tree().reload_current_scene()
+	get_tree().change_scene("res://assets/scene/main_menu.tscn")
 
 
 func _on_restart_pressed():
